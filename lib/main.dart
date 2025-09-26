@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:pointer_interceptor/pointer_interceptor.dart';
-import 'package:zikzak_inappwebview/zikzak_inappwebview.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
 import 'chrome_safari_browser_example.screen.dart';
 import 'headless_in_app_webview.screen.dart';
