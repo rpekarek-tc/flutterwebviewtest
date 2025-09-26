@@ -16,12 +16,7 @@ class _InAppWebViewExampleScreenState extends State<InAppWebViewExampleScreen> {
   final GlobalKey webViewKey = GlobalKey();
 
   InAppWebViewController? webViewController;
-  InAppWebViewSettings settings = InAppWebViewSettings(
-      isInspectable: kDebugMode,
-      mediaPlaybackRequiresUserGesture: false,
-      allowsInlineMediaPlayback: true,
-      iframeAllow: "camera; microphone",
-      iframeAllowFullscreen: true);
+  InAppWebViewSettings? settings;
 
   PullToRefreshController? pullToRefreshController;
 
@@ -90,11 +85,60 @@ class _InAppWebViewExampleScreenState extends State<InAppWebViewExampleScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final Map<String, dynamic>? args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
+    final String? initialUrl = args?['url'] as String?;
+    final bool useCustomUserAgent = args?['useCustomUserAgent'] ?? false;
+    final String? customUserAgent = args?['customUserAgent'] as String?;
+
+    // Initialize settings with custom user agent if enabled
+    settings ??= InAppWebViewSettings(
+      isInspectable: kDebugMode,
+      mediaPlaybackRequiresUserGesture: false,
+      allowsInlineMediaPlayback: true,
+      iframeAllow: "camera; microphone",
+      iframeAllowFullscreen: true,
+      applicationNameForUserAgent: useCustomUserAgent ? customUserAgent : null,
+    );
+
     return Scaffold(
-        appBar: AppBar(title: Text("InAppWebView")),
-        // drawer: myDrawer(context: context),
         body: SafeArea(
             child: Column(children: <Widget>[
+          Container(
+            height: 60,
+            decoration: BoxDecoration(
+              color: Theme.of(context).primaryColor,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black26,
+                  blurRadius: 4,
+                  offset: Offset(0, 2),
+                ),
+              ],
+            ),
+            child: Row(
+              children: [
+                IconButton(
+                  icon: Icon(Icons.arrow_back, color: Colors.white),
+                  onPressed: () {
+                    Navigator.pushReplacementNamed(context, '/');
+                  },
+                ),
+                Expanded(
+                  child: Center(
+                    child: Text(
+                      'Web Browser',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(width: 48),
+              ],
+            ),
+          ),
           TextField(
             decoration: InputDecoration(prefixIcon: Icon(Icons.search)),
             controller: urlController,
@@ -117,7 +161,7 @@ class _InAppWebViewExampleScreenState extends State<InAppWebViewExampleScreen> {
                   key: webViewKey,
                   webViewEnvironment: webViewEnvironment,
                   initialUrlRequest:
-                      URLRequest(url: WebUri('http://localhost:3000')),
+                      URLRequest(url: WebUri(initialUrl ?? 'https://app.dev.join9am.com')),
                   // initialUrlRequest:
                   // URLRequest(url: WebUri(Uri.base.toString().replaceFirst("/#/", "/") + 'page.html')),
                   // initialFile: "assets/index.html",

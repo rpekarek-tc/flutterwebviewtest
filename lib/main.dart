@@ -7,7 +7,7 @@ import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
 import 'chrome_safari_browser_example.screen.dart';
 import 'headless_in_app_webview.screen.dart';
-import 'in_app_browser_example.screen.dart';
+import 'home_screen.dart';
 import 'in_app_webiew_example.screen.dart';
 import 'web_authentication_session_example.screen.dart';
 
@@ -176,14 +176,14 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     if (kIsWeb) {
       return MaterialApp(initialRoute: '/', routes: {
-        '/': (context) => InAppWebViewExampleScreen(),
+        '/': (context) => HomeScreen(),
+        '/InAppWebView': (context) => InAppWebViewExampleScreen(),
       });
     }
     if (defaultTargetPlatform == TargetPlatform.macOS) {
       return MaterialApp(initialRoute: '/', routes: {
-        // '/': (context) => InAppWebViewExampleScreen(),
-        // '/InAppBrowser': (context) => InAppBrowserExampleScreen(),
-        '/': (context) => InAppBrowserExampleScreen(),
+        '/': (context) => HomeScreen(),
+        '/InAppWebView': (context) => InAppWebViewExampleScreen(),
         '/HeadlessInAppWebView': (context) =>
             HeadlessInAppWebViewExampleScreen(),
         '/WebAuthenticationSession': (context) =>
@@ -192,15 +192,15 @@ class _MyAppState extends State<MyApp> {
     } else if (defaultTargetPlatform == TargetPlatform.windows ||
         defaultTargetPlatform == TargetPlatform.linux) {
       return MaterialApp(initialRoute: '/', routes: {
-        // '/': (context) => InAppWebViewExampleScreen(),
-        '/': (context) => InAppBrowserExampleScreen(),
+        '/': (context) => HomeScreen(),
+        '/InAppWebView': (context) => InAppWebViewExampleScreen(),
         '/HeadlessInAppWebView': (context) =>
             HeadlessInAppWebViewExampleScreen(),
       });
     }
     return MaterialApp(initialRoute: '/', routes: {
-      // '/': (context) => InAppWebViewExampleScreen(),
-      '/': (context) => InAppBrowserExampleScreen(),
+      '/': (context) => HomeScreen(),
+      '/InAppWebView': (context) => InAppWebViewExampleScreen(),
       '/ChromeSafariBrowser': (context) => ChromeSafariBrowserExampleScreen(),
       '/HeadlessInAppWebView': (context) => HeadlessInAppWebViewExampleScreen(),
       '/WebAuthenticationSession': (context) =>
