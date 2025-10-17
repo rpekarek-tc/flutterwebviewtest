@@ -89,7 +89,7 @@ class _HomeScreenState extends State<HomeScreen> {
       settings: InAppBrowserClassSettings(
         browserSettings: InAppBrowserSettings(
           toolbarTopBackgroundColor: Colors.blue,
-          presentationStyle: ModalPresentationStyle.POPOVER,
+          presentationStyle: ModalPresentationStyle.OVER_FULL_SCREEN,
         ),
         webViewSettings: InAppWebViewSettings(
           isInspectable: kDebugMode,
