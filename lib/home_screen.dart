@@ -70,7 +70,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController _urlController = TextEditingController(
-    text: 'https://app.dev.join9am.com',
+    text: 'https://www.google.com',
   );
   bool _useCustomUserAgent = false;
   final String _customUserAgent = "TCMobileInAppBrowser/1.0";
